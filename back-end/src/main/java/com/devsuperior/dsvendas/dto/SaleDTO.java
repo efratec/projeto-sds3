@@ -1,29 +1,17 @@
-package com.devsuperior.dsvendas.entities;
+package com.devsuperior.dsvendas.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 
-@Entity
-@Table(name = "tb_sales")
-public class Sale implements Serializable {
+public class SaleDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer visited;
     private Integer deals;
     private BigDecimal amount;
     private LocalDate date;
-
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller seller;
-
-    public Sale() {
-    }
+    private SellerDTO seller;
 
     public Long getId() {
         return id;
@@ -65,25 +53,12 @@ public class Sale implements Serializable {
         this.date = date;
     }
 
-    public Seller getSeller() {
+    public SellerDTO getSeller() {
         return seller;
     }
 
-    public void setSeller(Seller seller) {
+    public void setSeller(SellerDTO seller) {
         this.seller = seller;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sale sale = (Sale) o;
-        return Objects.equals(id, sale.id) && Objects.equals(visited, sale.visited) && Objects.equals(deals, sale.deals) && Objects.equals(amount, sale.amount) && Objects.equals(date, sale.date) && Objects.equals(seller, sale.seller);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, visited, deals, amount, date, seller);
     }
 
 }
